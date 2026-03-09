@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+RECORD_PID_FILE="${XDG_RUNTIME_DIR}/ffmpeg.record.pid"
+
+source $XDG_CONFIG_HOME/shell/theme.sh
+
+case "$BLOCK_BUTTON" in 
+    1)
+        if [ -f "$RECORD_PID_FILE" ]; then 
+            ffmpeg_pid="$(head -n 1 "$RECORD_PID_FILE")"
+            kill -INT "${ffmpeg_pid}" 
+            wait "${ffmpeg_pid}"
+            notify-send -u normal -i record-desktop "Screen recording has finished" "Record saved in $(tail -n 1 "$RECORD_PID_FILE")"
+            rm "$RECORD_PID_FILE"
+            exit 0
+        fi 
+        ;;
+esac
+
+if [ -f "$RECORD_PID_FILE" ]; then 
+    _dwm-block-2d "" "$WARNING_COLOR"
+else 
+    printf '\0'
+fi 

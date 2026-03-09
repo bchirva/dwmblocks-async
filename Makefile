@@ -4,6 +4,7 @@ BIN := dwmblocks
 BUILD_DIR := build
 SRC_DIR := src
 INC_DIR := include
+SCRIPTS_DIR := scripts
 
 DEBUG := 0
 VERBOSE := 0
@@ -18,6 +19,7 @@ LDLIBS := $(shell pkg-config --libs $(LIBS))
 
 SRCS := $(wildcard $(SRC_DIR)/*.c)
 OBJS := $(subst $(SRC_DIR)/,$(BUILD_DIR)/,$(SRCS:.c=.o))
+SCRIPTS := $(notdir $(wildcard $(SCRIPTS_DIR)/*))
 
 INSTALL_DIR := $(DESTDIR)$(PREFIX)/bin
 
@@ -50,8 +52,18 @@ install: $(BUILD_DIR)/$(BIN)
 	$(PRINTF) "INSTALL" $(INSTALL_DIR)/$(BIN)
 	$Qinstall -D -m 755 $< $(INSTALL_DIR)/$(BIN)
 
+	$(PRINTF) "INSTALL $(SCRIPTS) FROM $(SCRIPTS_DIR)"
+	$(Q)for script in $(SCRIPTS); do \
+		install -D -m 755 "$(SCRIPTS_DIR)/$$script" "$(INSTALL_DIR)"; \
+	done
+
 uninstall:
 	$(PRINTF) "RM" $(INSTALL_DIR)/$(BIN)
 	$Q$(RM) $(INSTALL_DIR)/$(BIN)
+
+	$(PRINTF) "RM $(SCRIPTS) FROM $(INSTALL_DIR)"
+	$(Q)for script in $(SCRIPTS); do \
+		rm -f "$(INSTALL_DIR)/$$script"; \
+	done
 
 .PHONY: all clean install uninstall
