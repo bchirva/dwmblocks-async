@@ -13,6 +13,10 @@ network_status="$(nmcli networking \
     | sed "s/\<enabled\>/true/; s/\<disabled\>/false/")"
 
 if $network_status ; then 
+
+    proxy_icon=""
+    systemctl -q status "sing-box@${USER}.service" > /dev/null && proxy_icon=" 󰒃"
+
     active_device=$(nmcli -g DEVICE,TYPE,STATE,CONNECTION device \
         | grep -Ev ":(loopback|bridge|tun|unavailable|unmanaged|wifi-p2p):" \
         | grep -m 1 ":connected:")
@@ -20,8 +24,8 @@ if $network_status ; then
         | cut -d ':' -f 2)"
 
     case "$device_type" in
-        ethernet) _dwm-block-2d "󰈀 $(printf '%s' "$active_device" | cut -d ':' -f 1)" ;;
-        wifi)     _dwm-block-2d " $(printf '%s' "$active_device" | cut -d ':' -f 4)" ;;
+        ethernet) _dwm-block-2d "󰈀 $(printf '%s' "$active_device" | cut -d ':' -f 1)$proxy_icon" ;;
+        wifi)     _dwm-block-2d " $(printf '%s' "$active_device" | cut -d ':' -f 4)$proxy_icon" ;;
         *)        _dwm-block-2d "󰌙" ;;
     esac 
 else 
