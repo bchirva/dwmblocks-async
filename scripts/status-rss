@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+case "$BLOCK_BUTTON" in 
+    1) $TERMINAL -e newsboat ;;
+esac
+
+news_count=$(newsboat -x print-unread | cut -d ' ' -f 1)
+
+if [ "$news_count" -ne 0 ]; then 
+    _dwm-block-2d " $news_count"
+else 
+    printf '\0'
+fi
+

@@ -20,6 +20,7 @@
 #define BLOCKS(X)             \
     X("", "status-ffmpeg-record", 1, 1) \
     X("", "status-music", 1, 2) \
+    X("", "status-rss", 3600, 10) \
     X("", "status-audio output", 1, 3) \
     X("", "status-audio input", 1, 4) \
     X("", "status-network", 5, 5) \
