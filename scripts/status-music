@@ -11,7 +11,8 @@ esac
 
 song="$(mpc --format "%title% - %artist%" current)"
 if [ -n "${song}" ]; then 
-    _dwm-block-2d "󰝚 ${song}"
+    icon="$(mpc status "%state%" | sed 's/playing//;s/paused//;s/stopped//')"
+    _dwm-block-2d "${icon} ${song}"
 else 
     printf '\0'
 fi
