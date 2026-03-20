@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+case "$BLOCK_BUTTON" in 
+    1) pidof spt >/dev/null && kill -35 "$(pidof spt)" && kill -45 "$(pidof dwmblocks)" ;;
+    3) pidof spt >/dev/null && kill -36 "$(pidof spt)" && kill -45 "$(pidof dwmblocks)" ;;
+esac
+
+if [ -e "$XDG_RUNTIME_DIR/spt/status" ]; then 
+    _dwm-block-2d "$(sed 's/focus//;s/break/󰒲/;s/paused/[󰏤]/' "$XDG_RUNTIME_DIR/spt/status")"
+else 
+    printf '\0'
+fi
