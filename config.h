@@ -26,7 +26,6 @@
     X("", "status-network", 5, 5) \
     X("", "status-bluetooth", 5, 6)  \
     X("", "status-keyboard", 1, 7)  \
-    X("", "status-weather", 3600, 8) \
     X("", "status-pomodoro", 1, 11) \
     X("", "status-date", 5, 9)
 
