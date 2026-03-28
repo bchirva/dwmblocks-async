@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+if ! command -v neomutt >/dev/null; then 
+    printf '\0'
+    exit 0
+fi
+
+case "$BLOCK_BUTTON" in 
+    1) $TERMINAL -e neomutt ;;
+esac
+
+mail_count=$(notmuch count tag:unread)
+
+if [ "$mail_count" -ne 0 ]; then 
+    _dwm-block-2d "󰇮 $mail_count"
+else 
+    printf '\0'
+fi
+

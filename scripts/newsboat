@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+_upd_dwmblocks() {
+    pkill -RTMIN+10 dwmblocks 
+}
+
+trap _upd_dwmblocks EXIT INT TERM
+
+newsboat "$@"
+exit $?

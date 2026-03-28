@@ -2,7 +2,7 @@
 
 RECORD_PID_FILE="${XDG_RUNTIME_DIR}/ffmpeg.record.pid"
 
-source $XDG_CONFIG_HOME/shell/theme.sh
+. $XDG_CONFIG_HOME/shell/theme.sh
 
 case "$BLOCK_BUTTON" in 
     1)
@@ -18,7 +18,7 @@ case "$BLOCK_BUTTON" in
 esac
 
 if [ -f "$RECORD_PID_FILE" ]; then 
-    _dwm-block-2d "" "$WARNING_COLOR"
+    _dwm-block-2d "󰑊" "$WARNING_COLOR"
 else 
     printf '\0'
 fi 

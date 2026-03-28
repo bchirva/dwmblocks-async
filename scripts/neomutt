@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+_upd_dwmblocks() {
+    pkill -RTMIN+12 dwmblocks 
+}
+
+trap _upd_dwmblocks EXIT INT TERM
+
+neomutt "$@"
+exit $?
