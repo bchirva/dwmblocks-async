@@ -1,0 +1,2 @@
+@hourly /usr/local/bin/cron-update-email
+@hourly /usr/local/bin/cron-update-rss

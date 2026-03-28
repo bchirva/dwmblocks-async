@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+
+if ! command -v mbsync >/dev/null || ! command -v notmuch; then 
+    exit
+fi 
+
+export XDG_CACHE_HOME=$HOME/.cache 
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share 
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export XDG_STATE_HOME=$HOME/.local/state
+export PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store
+export NOTMUCH_CONFIG=$XDG_CONFIG_HOME/notmuch/config
+
+unread=$(notmuch count tag:unread)
+mbsync -a
+notmuch new 
+
+unread=$(( $(notmuch count tag:unread) - unread))
+if [ $unread -gt 0 ] && command -v notify-send >/dev/null; then 
+    notify-send \
+        "Mail updated" \
+        "$unread new emails" \
+        -i internet-mail 
+fi 
+
+pkill -RTMIN+12 dwmblocks 
