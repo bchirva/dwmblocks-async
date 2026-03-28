@@ -5,7 +5,7 @@ _upd_dwmblocks() {
 }
 
 for arg in "$@"; do
-    if [ "$arg" = "print-unread" ]; then 
+    if [ "$arg" = "-x" ]; then 
       skip=1
     fi
 done

@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+if ! command -v mbsync >/dev/null || ! command -v notmuch; then 
+    exit
+fi 
+
+unread=$(notmuch count tag:unread)
+mbsync -a
+notmuch new 
+
+unread=$(( $(notmuch count tag:unread) - unread))
+if [ $unread -gt 0 ] && command -v notify-send >/dev/null; then 
+    notify-send \
+        "Mail updated" \
+        "$unread new emails" \
+        -i internet-mail 
+fi 
+
+pkill -RTMIN+12 dwmblocks 

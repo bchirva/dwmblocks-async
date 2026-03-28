@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+if ! command -v newsboat >/dev/null; then 
+    exit
+fi 
+
+unread=$(newsboat -x print-unread | cut -d ' ' -f 1)
+echo "$unread unread"
+newsboat -x reload
+
+unread=$(( $(newsboat -x print-unread | cut -d ' ' -f 1) - unread ))
+echo "$unread new unread"
+if [ $unread -gt 0 ] && command -v notify-send >/dev/null; then 
+    notify-send \
+        "Mail updated" \
+        "$unread new emails" \
+        -i internet-mail 
+fi
+
+pkill -RTMIN+10 dwmblocks 
