@@ -9,7 +9,7 @@ case "$BLOCK_BUTTON" in
     1) mpc toggle ;;
 esac
 
-song="$(mpc --format "%title% - %artist%" current)"
+song="$(mpc current --format "%title% - %artist%")"
 if [ -n "${song}" ]; then 
     icon="$(mpc status "%state%" | sed 's/playing//;s/paused//;s/stopped//')"
     _dwm-block-2d "${icon} ${song}"

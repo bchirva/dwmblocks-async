@@ -4,7 +4,14 @@ _upd_dwmblocks() {
     pkill -RTMIN+10 dwmblocks 
 }
 
-trap _upd_dwmblocks EXIT INT TERM
+for arg in "$@"; do
+    if [ "$arg" = "print-unread" ]; then 
+      skip=1
+    fi
+done
 
-newsboat "$@"
-exit $?
+if [ -z "$skip" ]; then 
+    trap _upd_dwmblocks EXIT INT TERM
+fi 
+
+/usr/bin/newsboat "$@"
