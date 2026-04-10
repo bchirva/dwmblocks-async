@@ -6,7 +6,7 @@ case "$BLOCK_BUTTON" in
 esac
 
 if [ -e "$XDG_RUNTIME_DIR/spt/status" ]; then 
-    _dwm-block-2d "$(sed 's/focus//;s/break/󰒲/;s/paused/[󰏤]/' "$XDG_RUNTIME_DIR/spt/status")"
+    _dwm-block-2d "$(sed 's/focus/󰣉/;s/break/󰒲/;s/paused/[󰏤]/' "$XDG_RUNTIME_DIR/spt/status")"
 else 
     printf '\0'
 fi
