@@ -17,17 +17,17 @@
 #define TRAILING_DELIMITER 1
 
 // Define blocks for the status feed as X(icon, cmd, interval, signal).
-#define BLOCKS(X)             \
+#define BLOCKS(X)                       \
     X("", "status-ffmpeg-record", 1, 1) \
-    X("", "status-music", 1, 2) \
-    X("", "status-rss", 0, 10) \
-    X("", "status-mail", 0, 12) \
-    X("", "status-audio output", 1, 3) \
-    X("", "status-audio input", 1, 4) \
-    X("", "status-network", 5, 5) \
-    X("", "status-bluetooth", 5, 6)  \
-    X("", "status-keyboard", 1, 7)  \
-    X("", "status-pomodoro", 1, 11) \
+    X("", "status-music", 1, 2)         \
+    X("", "status-rss", 0, 10)          \
+    X("", "status-mail", 0, 12)         \
+    X("", "status-audio output", 1, 3)  \
+    X("", "status-audio input", 1, 4)   \
+    X("", "status-network", 5, 5)       \
+    X("", "status-bluetooth", 5, 6)     \
+    X("", "status-keyboard", 1, 7)      \
+    X("", "status-pomodoro", 0, 11)     \
     X("", "status-date", 5, 9)
 
 #endif  // CONFIG_H
