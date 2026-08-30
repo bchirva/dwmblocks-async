@@ -1,18 +1,16 @@
 #!/usr/bin/env sh
 
-BLOCK_TEXT="$1"
-FG_COLOR="$2"
-BG_COLOR="$3"
+RESET="^d^"
 
+BLOCK_TEXT="$1"
 [ -z "$BLOCK_TEXT" ] && exit 1
+
+FG_COLOR="$2"
+[ -n "$FG_COLOR" ] && FG_COLOR="^c$FG_COLOR^"
 
 if [ -e $XDG_CONFIG_HOME/shell/theme.sh ]; then
     . $XDG_CONFIG_HOME/shell/theme.sh
-    [ -z "$BG_COLOR" ] && BG_COLOR="$WIDGET_COLOR"
+    BORDER_COLOR="^c${BACKGROUND_BRIGHT_COLOR}^"
 fi
 
-[ -n "$FG_COLOR" ] && FG_COLOR="^c$FG_COLOR^"
-[ -n "$BG_COLOR" ] && BG_COLOR="^b$BG_COLOR^"
-RESET="^d^"
-
-printf '%s\n' "$BG_COLOR$FG_COLOR $BLOCK_TEXT $RESET" 
+printf '%s\n' "${BORDER_COLOR}[${RESET} ${FG_COLOR}${BLOCK_TEXT}${RESET} ${BORDER_COLOR}]${RESET}" 
