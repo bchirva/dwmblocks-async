@@ -18,7 +18,7 @@ case "$BLOCK_BUTTON" in
 esac
 
 if [ -f "$RECORD_PID_FILE" ]; then 
-    _dwm-block-2d "󰑊" "$WARNING_COLOR"
+    _dwm-block-2d "󰑊" "$ERROR_COLOR"
 else 
     printf '\0'
 fi 
